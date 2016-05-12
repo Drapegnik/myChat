@@ -1,0 +1,15 @@
+{% load i18n %}
+<div class="row col-md-8 col-md-offset-2 sign_form">
+    <div class="sign_form_in">
+        <h3 class="text-center">{% trans 'Welcome' %}:</h3>
+        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-social btn-lg btn-facebook">
+            <span class="fa fa-facebook"></span>{% trans 'Sign in with Facebook' %}
+        </a>
+        <a href="{% url 'social:begin' 'vk-oauth2' %}" class="btn btn-block btn-social btn-lg btn-vk">
+            <span class="fa fa-vk"></span>{% trans 'Sign in with VK' %}
+        </a>
+        <a href="{% url 'social:begin' 'github' %}" class="btn btn-block btn-social btn-lg btn-github">
+            <span class="fa fa-github"></span>{% trans 'Sign in with GitHub' %}
+        </a>
+    </div>
+</div>

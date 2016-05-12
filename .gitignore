@@ -1,0 +1,7 @@
+.idea/
+*.log
+*.pot
+*.pyc
+
+components/
+staticfiles/

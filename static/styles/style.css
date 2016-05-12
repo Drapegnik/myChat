@@ -1,0 +1,59 @@
+#chat_list {
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: block;
+}
+
+.input_group {
+    padding-top: 10px;
+}
+
+.sign_form {
+    border-radius: 10px;
+    background-color: #4e5d6c;
+}
+
+.sign_form_in {
+    margin: 40px 10px 50px 10px;
+}
+
+.btn {
+    border-radius: 5px;
+}
+
+.fa-pencil, .fa-check {
+    margin-right: 4px;
+}
+
+.author-name {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.time {
+    color: #2a323a;
+}
+
+.delete {
+    color: #596a7b;
+}
+
+.alert-dismissible {
+    width: 70%;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.edit_mes {
+    border: #4e5d6c solid 2px;
+    border-radius: 5px;
+    width: 85%;
+}
+
+.holdcol::-webkit-input-placeholder {
+    color: #c0392b;
+}
+

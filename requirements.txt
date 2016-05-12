@@ -1,0 +1,7 @@
+Django
+django-bower
+dj-database-url
+gunicorn
+python-social-auth
+psycopg2
+whitenoise

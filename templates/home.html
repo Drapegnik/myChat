@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %} Home {% endblock %}
+{% block content %}
+    <div class="col-md-offset-3 col-md-6">
+        {% if user.is_authenticated %}
+            <div class="panel panel-default">
+            <h3 class="panel-heading">{% trans 'Messages' %}:</h3>
+            <h4 class="col-md-2 col-md-offset-1 control-label">{% trans 'Search' %}</h4>
+            <div class="form-group">
+                <div class="input-group col-md-6">
+                    <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                    <input ng-model="query" class="form-control">
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="chat_list">
+                    <div ng-repeat="mes in messages | filter:query" class="col-md-11">
+                        <div ng-class="mes.author == '{{ user.username }}' ? 'pull-right alert-info' : 'pull-left alert-success'"
+                             class="alert alert-dismissible">
+
+                            <span ng-show="mes.author == '{{ user.username }}' && editId != mes.mes_id && mes.status != 'delete'">
+                                <span ng-click="deleteMessage(mes.mes_id, mes.order_id)" class="close">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </span>
+                                <span ng-click="editMessage(mes.order_id)" class="close">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </span>
+                            </span>
+
+                            {% verbatim %}
+                            <p id="{{ 'id' + mes.order_id }}"
+                               ng-class="mes.status == 'delete' ? 'text-center delete' : ''"
+                               ng-hide="editId == mes.mes_id">{{ mes.text }}</p>
+
+                            <textarea autofocus id="{{'edit'+mes.order_id}}" class="edit_mes form-control"
+                                      ng-model="editMes" my-enter="confirmEditMessage(mes.mes_id, mes.order_id)"
+                                      my-esc="cancelEditMessage()"
+                                      ng-show="editId == mes.mes_id" type="text" maxlength="500"></textarea>
+
+                            <span ng-show="editId == mes.mes_id">
+                                <span ng-click="cancelEditMessage()" class="close">
+                                    <i style="color: #e74c3c;" class="fa fa-times"></i>
+                                </span>
+                                <span ng-click="confirmEditMessage(mes.mes_id, mes.order_id)" class="close"
+                                      ng-disabled="isBlank">
+                                    <i style=" color: #24BC28;" class="fa fa-check"></i>
+                                </span>
+                            </span>
+                            {% endverbatim %}
+
+                        </div>
+
+                        <span ng-class="mes.author == '{{ user.username }}' ? 'pull-left' : 'pull-right'"
+                              class="author-name">
+                            <strong>
+                                {% verbatim %}{{ mes.author }}{% endverbatim %}
+                            </strong>
+                        </span>
+
+                        <br>
+
+                        <span ng-class="mes.author == '{{ user.username }}' ? 'pull-left' : 'pull-right'"
+                              class="time small">
+                            <b>
+                                <span class="hidden-xs" ng-show="mes.status == 'delete'">delete on </span>
+                                <span class="hidden-xs" ng-show="mes.status == 'edit'">edit on </span>
+                                {% verbatim %}{{ mes.time | date:'mediumTime' }}{% endverbatim %}
+                            </b>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-8 input_group">
+                    <textarea id="send" my-enter="sendMessage()" ng-change="inputChange('#send')" class="form-control"
+                              ng-model="text"
+                              type="text" maxlength="500" placeholder="{% trans 'say something' %}"></textarea>
+                </div>
+
+                <div class="col-md-4 input_group">
+                    <button ng-click="sendMessage()" ng-disabled="connectionLost || isBlank"
+                            class="btn btn-danger">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                        {% trans 'send' %}
+                    </button>
+                </div>
+
+            </div>
+        {% else %}
+            {% include 'auth.html' %}
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
