@@ -1,4 +1,6 @@
 # myChat
+[![Code Climate](https://codeclimate.com/github/Drapegnik/myChat/badges/gpa.svg)](https://codeclimate.com/github/Drapegnik/myChat) [![Issue Count](https://codeclimate.com/github/Drapegnik/myChat/badges/issue_count.svg)](https://codeclimate.com/github/Drapegnik/myChat)
+
 A simple multiuser web-chat
 
 [**demo**](https://drapegnik-chat.herokuapp.com/ "mini-wiki")
